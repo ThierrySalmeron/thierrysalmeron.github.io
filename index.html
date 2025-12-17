@@ -9,18 +9,18 @@
     header { text-align:center; padding:0.3rem; background:#1e3a8a; color:#fff; }
     header nav a { margin:0 1rem; color:#fff; text-decoration:none; font-weight:bold; }
     .grid-3 { display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding:2rem; }
-    .card { background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:250px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; }
+    .card { background:#fff;  border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:300px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; }
     .card h2 { margin:0 0 0.75rem 0; }
-    .btn { display:inline-block; margin-top:1rem; padding:0.6rem 1.2rem; background:#1e3a8a; color:#fff; text-decoration:none; border-radius:6px; }
+    .btn { display:inline-block; margin-top:1rem; padding:0.6rem 0.6rem; background:#1e3a8a; color:#fff; text-decoration:none; border-radius:6px; }
     .btn:hover { background:#3b82f6; }
     /* compact utility to reduce vertical spacing for dense items */
     .compact { margin:0.2rem 0; }
-    .btn.compact { margin-top:0.2rem; padding:0.45rem 0.9rem; }
+    .btn.compact { margin-top:0.2rem; padding:0.45rem 0.2rem; }
     .card .item { display:flex; flex-direction:column; align-items:center; gap:0.5rem; margin-bottom:0.9rem; }
     .card .item p { margin:0; }
     /* Make buttons uniform width inside cards */
-    .card .item .btn, .card > .btn { width:180px; box-sizing:border-box; text-align:center; }
-    footer { text-align:center; padding:1rem; background:#eee; margin-top:2rem; }
+    .card .item .btn, .card > .btn { width:220px; box-sizing:border-box; text-align:center; }
+    footer { text-align:center; padding:0.1rem; background:#eee; margin-top:2rem; }
   </style>
 </head>
 <body>
@@ -37,15 +37,19 @@
       </div>
       <div class="item compact">
         <!-- <p>AVS à date</p>-->
-        <a class="btn compact" href="URL_POWERBI_AVS" target="_blank">Aller — AVS à date</a>
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/0745354a-f44e-472b-8b97-4650ff3a4d66/42296595339ab7cb4776?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=a33e7b6623cd07b9d668&height=601.39&width=1593.84&bookmarkGuid=c29283c3-6d3e-4984-ba91-b07136969e83" target="_blank">Aller — AVS à date</a>
       </div>
       <div class="item compact">
         <!-- <p>Toxiques sup 50€</p>-->
-        <a class="btn compact" href="URL_POWERBI_TOXIQUES" target="_blank">Toxiques &gt; 50€</a>
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=9f5d00f9-85ab-4cc9-9f1d-caca228d19cf&reportObjectId=e2713090-f037-4c4c-a8be-19837fce5a6e&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=65564e7bbb57cac1bc70&visual=67ebfbc840e4a31d21db&height=630.59&width=1838.43&bookmarkGuid=14f3bd96-f200-4b98-99d0-6b535e2eb328&pbi_source=shareVisual" target="_blank">Toxiques &gt; 50€</a>
       </div>
       <div class="item compact">
         <!-- <p>Tous les Toxiques</p>-->
-        <a class="btn compact" href="URL_POWERBI_TOXIQUES" target="_blank">Tous les Toxiques</a>
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=9f5d00f9-85ab-4cc9-9f1d-caca228d19cf&reportObjectId=e2713090-f037-4c4c-a8be-19837fce5a6e&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=65564e7bbb57cac1bc70&visual=67ebfbc840e4a31d21db&height=630.59&width=1838.43&bookmarkGuid=2d8690d3-09d9-4e63-b022-571d4cbc2e47&pbi_source=shareVisual" target="_blank">Tous les Toxiques</a>
+      </div>
+      <div class="item compact">
+        <!-- <p>Tous les Toxiques</p>-->
+        <a class="btn compact" href="URL_POWERBI_TOXIQUES" target="_blank">Sans Vente</a>
       </div>
       <div class="item compact">
         <!-- <p>Tous les Toxiques</p>-->
