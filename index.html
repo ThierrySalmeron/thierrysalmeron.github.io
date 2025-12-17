@@ -6,13 +6,20 @@
   <title>Gestion</title>
   <style>
     body { font-family:'Segoe UI', Tahoma, sans-serif; margin:0; padding:0; background:#f7f9fc; color:#333; }
-    header { text-align:center; padding:2rem; background:#1e3a8a; color:#fff; }
+    header { text-align:center; padding:0.3rem; background:#1e3a8a; color:#fff; }
     header nav a { margin:0 1rem; color:#fff; text-decoration:none; font-weight:bold; }
-    .grid-3 { display:flex; justify-content:center; flex-wrap:wrap; gap:2rem; padding:2rem; }
-    .card { background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:250px; }
-    .card h2 { margin-top:0; }
+    .grid-3 { display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding:2rem; }
+    .card { background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:250px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; }
+    .card h2 { margin:0 0 0.75rem 0; }
     .btn { display:inline-block; margin-top:1rem; padding:0.6rem 1.2rem; background:#1e3a8a; color:#fff; text-decoration:none; border-radius:6px; }
     .btn:hover { background:#3b82f6; }
+    /* compact utility to reduce vertical spacing for dense items */
+    .compact { margin:0.2rem 0; }
+    .btn.compact { margin-top:0.2rem; padding:0.45rem 0.9rem; }
+    .card .item { display:flex; flex-direction:column; align-items:center; gap:0.5rem; margin-bottom:0.9rem; }
+    .card .item p { margin:0; }
+    /* Make buttons uniform width inside cards */
+    .card .item .btn, .card > .btn { width:180px; box-sizing:border-box; text-align:center; }
     footer { text-align:center; padding:1rem; background:#eee; margin-top:2rem; }
   </style>
 </head>
@@ -25,10 +32,27 @@
   <main class="grid-3">
     <div class="card">
       <h2>Gestion</h2>
-      <p>AVS</p>
-      <p>Toxiques</p>
+      <div class="item compact">
+        <!-- <p>AVS échus</p> -->
 
-      <a class="btn" href="gestion.html">Voir le rapport</a>
+        <a class="btn compact" href="URL_POWERBI_AVS" target="_blank">Aller — AVS échus</a>
+      </div>
+      <div class="item compact">
+        <!-- <p>AVS à date</p>-->
+        <a class="btn compact" href="URL_POWERBI_AVS" target="_blank">Aller — AVS à date</a>
+      </div>
+      <div class="item compact">
+        <!-- <p>Toxiques sup 50€</p>-->
+        <a class="btn compact" href="URL_POWERBI_TOXIQUES" target="_blank">Toxiques &gt; 50€</a>
+      </div>
+      <div class="item compact">
+        <!-- <p>Tous les Toxiques</p>-->
+        <a class="btn compact" href="URL_POWERBI_TOXIQUES" target="_blank">Tous les Toxiques</a>
+      </div>
+      <div class="item compact">
+        <!-- <p>Tous les Toxiques</p>-->
+        <a class="btn compact" href="URL_POWERBI_TOXIQUES" target="_blank">Sans Vente</a>
+      </div>
     </div>
     <div class="card">
       <h2>Performance</h2>
@@ -43,7 +67,7 @@
   </main>
 
   <footer>
-    <p>© 2025 Portail Power BI</p>
+    <p>V1 12/2025 ©T.Salmeron</p>
   </footer>
 </body>
 </html>
