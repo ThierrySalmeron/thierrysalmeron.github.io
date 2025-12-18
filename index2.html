@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion</title>
+  <style>
+    body { font-family:'Segoe UI', Tahoma, sans-serif; margin:0; padding:0; background:#f7f9fc; color:#333; }
+    header { text-align:center; padding:0.1rem; background:#1e3a8a; color:#fff; }
+    
+    /* --- STYLE SPÉCIFIQUE POUR DATABOX --- */
+    .btn-highlight { 
+      background: #f59e0b !important; 
+      color: #000 !important;        
+      border: 1px solid #fff;        
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+      width: 120px !important; /* Un peu plus large pour le texte */
+    }
+    .btn-highlight:hover { background: #fbbf24 !important; transform: scale(1.05); }
+
+    .grid-3 { display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap; gap:1rem; padding:1rem; }
+    .card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:280px; display:flex; flex-direction:column; padding: 10px 5px; }
+    .card h2 { margin:0 0 0.75rem 0; font-size: 1.2rem; }
+    
+    .btn { display:inline-block; background:#1e3a8a; color:#fff; text-decoration:none; border-radius:6px; font-size: 0.85rem; transition: background 0.2s; }
+    .btn:hover { background:#3b82f6; }
+
+    /* --- ALIGNEMENT BOUTON + IMAGE --- */
+    .card .item { 
+      display: flex; 
+      flex-direction: row; /* Aligne bouton et image côte à côte */
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+      margin-bottom: 0.6rem; 
+    }
+
+    /* Ajustement largeur bouton pour laisser place à l'image */
+    .card .item .btn { width: 200px; padding: 0.5rem 0.2rem; margin-top: 0; }
+
+    /* Style de l'icône Sheet */
+    .sheet-link img {
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+      transition: transform 0.2s;
+    }
+    .sheet-link img:hover { transform: scale(1.2); }
+
+    footer { text-align:center; padding:0.1rem; background:#eee; margin-top:2rem; }
+    .compact { margin:0.2rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔹 Gestion</h1>
+    <div class="item compact" style="justify-content: center; display: flex;">
+        <a class="btn compact btn-highlight" href="https://databox.adeo.cloud/home" target="_blank">DataBox</a>
+    </div>
+  </header>
+
+  <main class="grid-3">
+    <div class="card">
+      <h2>Gestion</h2>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Aller — AVS échus</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Aller — AVS à date</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Toxiques > 50€</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Tous les Toxiques</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Cockpit CD</h2>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">TGV</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">INCONTOURNABLES</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Performance</h2>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Prix promos</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn" href="https://offer.adeo.com/..." target="_blank">Pricely</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Inventaire</h2>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Refs jamais comptées</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn" href="https://app.powerbi.com/..." target="_blank">Casquettes à compter</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>V1 12/2025 ©T.Salmeron</p>
+  </footer>
+</body>
+</html>
