@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thierry</title>
+  <title>Tableau de bord interactif</title>
   <style>
     :root {
       --primary: #2563eb;
@@ -23,7 +24,7 @@
       height: 100vh;
     }
 
-    /* Barre latérale */
+    /* ===== SIDEBAR ===== */
     .sidebar {
       width: 230px;
       background: var(--primary-dark);
@@ -62,7 +63,7 @@
       opacity: 0.8;
     }
 
-    /* Contenu principal */
+    /* ===== MAIN AREA ===== */
     .main {
       flex: 1;
       display: flex;
@@ -98,13 +99,13 @@
       background: var(--primary-dark);
     }
 
-    /* Cartes */
     main {
       flex: 1;
       padding: 2rem;
       overflow-y: auto;
     }
 
+    /* ===== CARD STYLES ===== */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -132,22 +133,33 @@
     .links {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
-    .links a {
-      text-decoration: none;
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 0.5rem;
       border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      text-decoration: none;
+      color: white;
       font-size: 0.9rem;
       transition: background 0.2s;
     }
 
-    .links a:hover {
+    .link-item:hover {
       background: var(--primary-dark);
+    }
+
+    .link-item img {
+      width: 20px;
+      height: 20px;
+      margin-left: 8px;
+      border-radius: 3px;
+      background: white;
+      padding: 2px;
     }
 
     @keyframes fadeIn {
@@ -168,7 +180,7 @@
 <body>
   <aside class="sidebar">
     <div>
-      <h2>🔹 Espaces métier</h2>
+      <h2>📊 Tableau de bord</h2>
       <nav>
         <a class="active" data-target="gestion">Gestion</a>
         <a data-target="capas">Capas</a>
@@ -177,59 +189,64 @@
         <a data-target="cockpit">Cockpit CD</a>
       </nav>
     </div>
-    <div class="footer">V1.2 © T.Salmeron</div>
+    <div class="footer">V1.3 © T.Salmeron</div>
   </aside>
 
   <div class="main">
     <header>
-      <h1>Bienvenue chez Thierry</h1>
+      <h1>Pilotage central</h1>
       <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">DataBox</button>
     </header>
 
     <main>
+      <!-- GESTION -->
       <div id="gestion" class="card active">
         <h3>Gestion</h3>
         <div class="links">
-          <a href="#">Aller — AVS échus</a>
-          <a href="#">Aller — AVS à date</a>
-          <a href="#">Toxiques > 50 €</a>
-          <a href="#">Tous les Toxiques</a>
-          <a href="#">Sans Vente >50 €</a>
-          <a href="#">Tous Sans Vente</a>
+          <a class="link-item" href="#" target="_blank">AVS échus <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">AVS à date <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Toxiques > 50 € <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Tous les Toxiques <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Sans Vente >50 € <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Tous Sans Vente <img src="sheet.png" alt="Sheet"></a>
         </div>
       </div>
 
+      <!-- CAPAS -->
       <div id="capas" class="card">
         <h3>Capas</h3>
         <div class="links">
-          <a href="#">Sur/sous dim</a>
-          <a href="#">A contrôler</a>
+          <a class="link-item" href="#" target="_blank">Sur/sous dim <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">A contrôler <img src="sheet.png" alt="Sheet"></a>
         </div>
       </div>
 
+      <!-- PERFORMANCE -->
       <div id="performance" class="card">
         <h3>Performance</h3>
         <div class="links">
-          <a href="#">Prix promos</a>
-          <a href="#">CA TG / Caisses</a>
-          <a href="#">Pricely</a>
+          <a class="link-item" href="#" target="_blank">Prix promos <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">CA TG / Caisses <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Pricely <img src="sheet.png" alt="Sheet"></a>
         </div>
       </div>
 
+      <!-- INVENTAIRE -->
       <div id="inventaire" class="card">
         <h3>Inventaire</h3>
         <div class="links">
-          <a href="#">Refs jamais comptées</a>
-          <a href="#">Casquettes</a>
-          <a href="#">Stocks negs</a>
+          <a class="link-item" href="#" target="_blank">Refs jamais comptées <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Casquettes <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Stocks negs <img src="sheet.png" alt="Sheet"></a>
         </div>
       </div>
 
+      <!-- COCKPIT -->
       <div id="cockpit" class="card">
         <h3>Cockpit CD</h3>
         <div class="links">
-          <a href="#">TGV</a>
-          <a href="#">Incontournables</a>
+          <a class="link-item" href="#" target="_blank">TGV <img src="sheet.png" alt="Sheet"></a>
+          <a class="link-item" href="#" target="_blank">Incontournables <img src="sheet.png" alt="Sheet"></a>
         </div>
       </div>
     </main>
@@ -241,11 +258,8 @@
 
     menuLinks.forEach(link => {
       link.addEventListener('click', () => {
-        // Retirer l'état actif des autres liens
         menuLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
-
-        // Afficher la carte correspondante
         const targetId = link.dataset.target;
         cards.forEach(card => {
           card.classList.toggle('active', card.id === targetId);
