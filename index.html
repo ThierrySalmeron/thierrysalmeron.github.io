@@ -8,6 +8,19 @@
     body { font-family:'Segoe UI', Tahoma, sans-serif; margin:0; padding:0; background:#f7f9fc; color:#333; }
     header { text-align:center; padding:0.1rem; background:#1e3a8a; color:#fff; }
     header nav a { margin:0 1rem; color:#fff; text-decoration:none; font-weight:bold; }
+    /* --- STYLE SPÉCIFIQUE POUR DATABOX --- */
+    .btn-highlight { 
+      background: #f59e0b !important; /* Orange ambré pour le contraste */
+      color: #000 !important;        /* Texte noir pour la lisibilité */
+      border: 1px solid #fff;        /* Bordure blanche pour le faire ressortir sur le bleu */
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+      width:100px;
+    }
+    .btn-highlight:hover { 
+      background: #fbbf24 !important; 
+      transform: scale(1.05);        /* Effet de léger grossissement au survol */
+    }
     .grid-3 { display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap; gap:1rem; padding:1rem; }
     .card { background:#fff;  border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:250px; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; }
     .card h2 { margin:0 0 0.75rem 0; }
@@ -27,7 +40,7 @@
   <header>
     <h1>🔹 Gestion</h1>
     <div class="item compact">
-        <a class="btn compact" href="https://databox.adeo.cloud/home" target="_blank">DataBox</a>
+        <a class="btn compact btn-highlight" href="https://databox.adeo.cloud/home" target="_blank">DataBox</a>
       </div>
   </header>
 
@@ -88,7 +101,10 @@
       </div>
       <div class="item compact">
         <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=e1bf2aae-bb47-471c-9ae4-0680b1b2fbe1&reportObjectId=1f68c280-3460-479f-bb0d-7661d273e759&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=ReportSection32a82e4c65b3957e6d37&visual=eb04023ac984ce591607&height=519.49&width=1097.85&bookmarkGuid=a4bb3cec-64e8-4070-a1c4-5d9c45e773a7&pbi_source=shareVisual" target="_blank">CA TG/TG caisses/cross</a>
-      </div>      
+      </div> 
+      <div class="item compact">
+        <a class="btn compact" href="https://offer.adeo.com/sales-price-changes/bu/LMFR" target="_blank">Pricely</a>
+      </div>     
     </div>
     <div class="card">
       <h2>Inventaire</h2>
