@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion — Tableau de bord</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --text: #1f2937;
+      --bg: #f9fafb;
+      --card-bg: #fff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Barre latérale */
+    .sidebar {
+      width: 230px;
+      background: var(--primary-dark);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .sidebar nav a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .footer {
+      font-size: 0.8rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Contenu */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Grille principale */
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .links a {
+      text-decoration: none;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .links a:hover {
+      background: var(--primary-dark);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      header {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div>
+      <h2>🔹 Gestion</h2>
+      <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Performance</a>
+        <a href="#">Inventaire</a>
+        <a href="#">Capas</a>
+        <a href="#">Cockpit CD</a>
+      </nav>
+    </div>
+    <div class="footer">V1.2 © T.Salmeron</div>
+  </aside>
+
+  <div class="main">
+    <header>
+      <h1>Tableau de bord de gestion</h1>
+      <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">DataBox</button>
+    </header>
+
+    <main>
+      <div class="card">
+        <h3>Gestion</h3>
+        <div class="links">
+          <a href="#">AVS échus</a>
+          <a href="#">AVS à date</a>
+          <a href="#">Toxiques > 50 €</a>
+          <a href="#">Sans Vente > 50 €</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Performance</h3>
+        <div class="links">
+          <a href="#">Prix promos</a>
+          <a href="#">CA TG / Caisses</a>
+          <a href="#">Pricely</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Inventaire</h3>
+        <div class="links">
+          <a href="#">Refs jamais comptées</a>
+          <a href="#">Casquettes</a>
+          <a href="#">Stocks negs</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Capas</h3>
+        <div class="links">
+          <a href="#">Sur/sous dim</a>
+          <a href="#">A contrôler</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Cockpit CD</h3>
+        <div class="links">
+          <a href="#">TGV</a>
+          <a href="#">Incontournables</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
