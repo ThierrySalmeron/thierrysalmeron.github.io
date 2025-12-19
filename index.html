@@ -1,202 +1,376 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestion</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de bord interactif</title>
   <style>
-    body { font-family:'Segoe UI', Tahoma, sans-serif; margin:0; padding:0; background:#f7f9fc; color:#333; }
-    header { text-align:center; padding:0.1rem; background:#1e3a8a; color:#fff; border-radius:20px; margin: 10px;}
-    header nav a { margin:0 1rem; color:#fff; text-decoration:none; font-weight:bold; }
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --text: #1f2937;
+      --bg: #f9fafb;
+      --card-bg: #fff;
+      --border: #e5e7eb;
+    }
 
-    /* --- STYLE SPÉCIFIQUE POUR DATABOX --- */
-    .btn-highlight { 
-      background: #f59e0b !important; 
-      color: #000 !important;        
-      border: 1px solid #fff;        
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 230px;
+      background: var(--primary-dark);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+      box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .sidebar h2 {
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem; /* 🔹 espace vertical augmenté */
+    }
+
+    .sidebar nav a {
+      position: relative;
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 0.8rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    /* Barre d'accent à gauche */
+    .sidebar nav a::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary-light);
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .sidebar nav a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px);
+    }
+
+    .sidebar nav a.active::before {
+      opacity: 1;
+    }
+
+    .sidebar nav a.active {
+      background: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+    }
+
+    .footer {
+      font-size: 0.8rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* ===== MAIN AREA ===== */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-      width: 100px !important;
-    }
-    .btn-highlight:hover { 
-      background: #fbbf24 !important; 
-      transform: scale(1.05);        
-    }
-
-    /* Grille flexible centrée */
-    .grid-3 { 
-      display: flex; 
-      justify-content: center; /* Centre les cartes horizontalement */
-      align-items: flex-start; 
-      flex-wrap: wrap;         /* Permet de passer à la ligne si l'écran est trop petit */
-      gap: 1rem; 
-      padding: 1rem; 
-      max-width: 1400px;       /* Optionnel : évite que les cartes s'étalent trop sur un écran ultra-large */
-      margin: 0 auto;          /* Centre le conteneur lui-même */
-    }
-
-    .card { 
-      background: #fff;  
-      border-radius: 12px; 
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-      text-align: center; 
-      width: 230px;            /* Largeur fixe réduite pour favoriser l'alignement horizontal */
-      display: flex; 
-      flex-direction: column; 
-      padding: 10px;
-      flex-shrink: 0;          /* Empêche les cartes de rétrécir */
-    }
-
-    .card h2 { 
-      margin: 0.5rem 0; 
-      font-size: 1.1rem; 
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 5px;
-    }
-
-    .btn { 
-      display: inline-block; 
-      background: #1e3a8a; 
-      color: #fff; 
-      text-decoration: none; 
-      border-radius: 6px; 
-      font-size: 0.85rem; /* Police bouton réduite */
+      cursor: pointer;
       transition: background 0.2s;
     }
-    .btn:hover { background: #3b82f6; }
 
-    .compact { margin: 0.15rem 0; }
-    .btn.compact { padding: 0.4rem 0.2rem; }
-
-    /* --- ALIGNEMENT BOUTON + IMAGE --- */
-    .card .item { 
-      display: flex; 
-      flex-direction: row; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 5px; 
-      margin-bottom: 0.4rem; 
+    .btn-primary:hover {
+      background: var(--primary-dark);
     }
 
-    /* Ajustement des boutons pour qu'ils rentrent bien */
-    .card .item .btn { 
-      width: 170px; 
-      font-size: 0.85rem;
-      padding: 0.5rem 0.2rem;
+    main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
     }
 
-    /* Style de l'icône Sheet */
-    .sheet-link img {
-      width: 20px; /* Plus petit */
-      height: 20px;
-      vertical-align: middle;
+    /* ===== CARD STYLES ===== */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      display: none;
+      animation: fadeIn 0.4s ease;
+      max-width: 600px;
+      margin: auto;
     }
 
-    footer { text-align: center; padding: 0.5rem; background: #eee; margin-top: 2rem; font-size: 0.8rem; }
+    .card.active {
+      display: block;
+    }
 
-    /* Adaptation si l'écran est vraiment très petit pour permettre le wrap */
-    @media (max-width: 600px) {
-      .grid-3 { flex-wrap: wrap; justify-content: center; }
+    .card h3 {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0.7rem 0;
+    }
+
+    .item .btn {
+      flex: 1;
+      text-decoration: none;
+      background: var(--primary);
+      color: white;
+      padding: 0.55rem;
+      text-align: center;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .item .btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .item .sheet-link img {
+      width: 22px;
+      height: 22px;
+      border-radius: 3px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .item:hover .sheet-link img {
+      transform: scale(1.1);
+      box-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      header {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🔹 Gestion</h1>
-    <div class="item compact">
-        <a class="btn compact btn-highlight" href="https://databox.adeo.cloud/home" target="_blank">DataBox</a>
-      </div>
-  </header>
-
-  <main class="grid-3">
-    <div class="card">
-      <h2>Gestion</h2>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Aller — AVS échus</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Aller — AVS à date</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Toxiques > 50€</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Tous les Toxiques</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Sans Vente >50€</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Tous Sans Vente</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
+  <aside class="sidebar">
+    <div>
+      <h2>📊 Tableau de bord</h2>
+      <nav>
+        <a class="active" data-target="gestion">Gestion</a>
+        <a data-target="capas">Capas</a>
+        <a data-target="performance">Performance</a>
+        <a data-target="inventaire">Inventaire</a>
+        <!-- -<a data-target="cockpit">Cockpit CD</a> -->
+      </nav>
     </div>
+    <div class="footer">V1.4 © T.Salmeron</div>
+  </aside>
 
-    <div class="card">
-      <h2>Cockpit CD</h2>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">TGV</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+  <div class="main">
+    <header>
+      <h1>Pilotage central</h1>
+      <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">DataBox</button>
+    </header>
+
+    <main>
+      <!-- GESTION -->
+      <div id="gestion" class="card active">
+        <h3>Gestion</h3>
+        
+        <div class="item">
+          <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=9f5d00f9-85ab-4cc9-9f1d-caca228d19cf&reportObjectId=e2713090-f037-4c4c-a8be-19837fce5a6e&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=65564e7bbb57cac1bc70&visual=ae1f0e23a8e75e3f95bc&height=630.47&width=1836.98&bookmarkGuid=24561c4a-1b6d-47a1-adf5-fbfc5ec5ecf1&pbi_source=shareVisual" target="_blank">Aller — AVS échus</a>
+          <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>         
+          </a>
+        </div>
+
+        <div class="item">
+          <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/0745354a-f44e-472b-8b97-4650ff3a4d66/42296595339ab7cb4776?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=a33e7b6623cd07b9d668&height=601.39&width=1593.84&bookmarkGuid=c29283c3-6d3e-4984-ba91-b07136969e83" target="_blank">Aller — AVS à date</a>
+          <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>            
+          </a>
+        </div>
+        <div class="item">
+          <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=9f5d00f9-85ab-4cc9-9f1d-caca228d19cf&reportObjectId=e2713090-f037-4c4c-a8be-19837fce5a6e&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=65564e7bbb57cac1bc70&visual=67ebfbc840e4a31d21db&height=630.59&width=1838.43&bookmarkGuid=14f3bd96-f200-4b98-99d0-6b535e2eb328&pbi_source=shareVisual" target="_blank">Toxiques &gt; 50€</a>
+          <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+        </div>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/b3c00e9b-61d5-4d05-a5cd-cb8730b4a55c/65564e7bbb57cac1bc70?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=67ebfbc840e4a31d21db&height=630.03&width=1836.77&bookmarkGuid=9f101f47-6fc6-4174-a3ed-eda968ce6767" target="_blank">Tous les Toxiques</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">INCONTOURNABLES</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=9f5d00f9-85ab-4cc9-9f1d-caca228d19cf&reportObjectId=e2713090-f037-4c4c-a8be-19837fce5a6e&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=65564e7bbb57cac1bc70&visual=3f19471c2a7fcd81b030&height=630.03&width=1838.38&bookmarkGuid=6abe5200-861e-44fc-b47e-52430f484fe3&pbi_source=shareVisual" target="_blank">Sans Vente stock>50€</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>
-    </div>
-    
-    <div class="card">
-      <h2>Capas</h2>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Sur/sous dim</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/3367179e-bf03-458e-9edc-4bc9c8fbfc73/42296595339ab7cb4776?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=a33e7b6623cd07b9d668&height=601.22&width=1837.20&bookmarkGuid=41213772-71b6-4df7-869c-7ad1f7e0b093" target="_blank">Tous les Sans Vente</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">A contrôler</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=9f5d00f9-85ab-4cc9-9f1d-caca228d19cf&reportObjectId=7d9e2905-9063-41ea-8880-333edf1407d3&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=42296595339ab7cb4776&visual=a33e7b6623cd07b9d668&height=635.88&width=1838.50&bookmarkGuid=2d33f49f-ec64-4e47-b0d1-ade321df3787&pbi_source=shareVisual" target="_blank">Tout mon stock</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      </div>
+
+      <!-- 
+      CAPAS 
+      -->
+      <div id="capas" class="card">
+        <h3>Capas</h3>
+        <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/096c4ef4-ed89-45c3-9889-08432b52bd77/ReportSection64ee8935eb40cd627b4e?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=d13c5f5655d0853c7d94&height=333.33&width=1278.33&bookmarkGuid=9972cdec-415a-4bfe-8cc5-e5e6fd72dec3" target="_blank">Sur/sous dim</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/096c4ef4-ed89-45c3-9889-08432b52bd77/ReportSection64ee8935eb40cd627b4e?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=81499dbb1c1ce84d7d4e&height=268.33&width=1280.00&bookmarkGuid=514fc9a9-bf68-40de-93ba-2ad3f76f3b49" target="_blank">A contrôler</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>   
+      <div class="item">
+        <a class="btn compact" href="" target="_blank">Capas = 1</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>      
+      </div>
+
+      <!-- PERFORMANCE -->
+      <div id="performance" class="card">
+        <h3>Performance</h3>
+        <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=e1bf2aae-bb47-471c-9ae4-0680b1b2fbe1&reportObjectId=89d7783f-9ad1-4d73-b31b-b0cee7d761b9&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=ReportSectiona77fe3b28ab006e5cd58&visual=71c15d0fe0250ba00523&height=731.40&width=1482.85&bookmarkGuid=3d0d8be2-71ed-4913-9a99-b0be3f5f6fdc&pbi_source=shareVisual" target="_blank">Prix promos</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
     </div>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=e1bf2aae-bb47-471c-9ae4-0680b1b2fbe1&reportObjectId=1f68c280-3460-479f-bb0d-7661d273e759&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=ReportSection32a82e4c65b3957e6d37&visual=eb04023ac984ce591607&height=519.49&width=1097.85&bookmarkGuid=a4bb3cec-64e8-4070-a1c4-5d9c45e773a7&pbi_source=shareVisual" target="_blank">CA TG/TG caisses/cross</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+    </div> 
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=ceb24b69-b8ca-4dc8-be78-69a489d2a9c8&reportObjectId=310ee4b9-30bf-45d8-91a5-953f0166c2b8&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=a4a3b5f3e53eddd8e7e0&visual=6cf560de81e0be362c08&height=298.22&width=544.26&bookmarkGuid=d5413826-42c8-40ce-9e3d-dc4f93365f29&pbi_source=shareVisual" target="_blank">TGV</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=ceb24b69-b8ca-4dc8-be78-69a489d2a9c8&reportObjectId=154feac1-d30a-46b2-998d-864f68eda306&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=ded744871ddf92995f2e&visual=06c83568e105957a95c2&height=673.00&width=1426.00&bookmarkGuid=d5618491-4ed2-4fc7-b509-e3424614cf95&pbi_source=shareVisual" target="_blank">INCONTOURNABLES</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      <div class="item">
+        <a class="btn compact" href="https://offer.adeo.com/sales-price-changes/bu/LMFR" target="_blank">Pricely</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+      </div>
+      </div>
 
-    <div class="card">
-      <h2>Performance</h2>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Prix promos</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">CA TG/Caisses</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div> 
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Pricely</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
-      </div>
+      <!-- INVENTAIRE -->
+      <div id="inventaire" class="card">
+        <h3>Inventaire</h3>
+        <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/98d86c11-0262-4129-ac7c-dfb22afb4807/b45da593be5461e577b7?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=ac3848030ce21ad3bae6&height=560.63&width=879.95&bookmarkGuid=1b02d620-2fcf-47a6-9841-50f764efe195" target="_blank">Refs jamais comptées</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
     </div>
-
-    <div class="card">
-      <h2>Inventaire</h2>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Refs jamais comptées</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/98d86c11-0262-4129-ac7c-dfb22afb4807/54e3ccbdd80377028467?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=329b871d488a2a4801a2&height=344.07&width=578.93&bookmarkGuid=709a2bff-f8bf-4812-bd30-28852772d216" target="_blank">Casquettes à compter</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Casquettes</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/98d86c11-0262-4129-ac7c-dfb22afb4807/9c42e7900c4024c46901?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=d5b50692b054aab59142&height=344.07&width=578.93&bookmarkGuid=12cef7cf-f8b2-44ed-b89c-7902a0073dae" target="_blank">Inventaire réserves</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>
-      <div class="item compact">
-        <a class="btn compact" href="..." target="_blank">Stocks negs</a>
-        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="S"></a>
+      <div class="item">
+        <a class="btn compact" href="https://app.powerbi.com/groups/me/reports/98d86c11-0262-4129-ac7c-dfb22afb4807/02dc602cbe05c068ae7d?ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&pbi_source=shareVisual&visual=2b845ceb610a700260a4&height=511.02&width=983.17&bookmarkGuid=c538c207-9b98-4d3c-8917-34958f3a6fc2" target="_blank">Stocks negs et suspects</a>
+        <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
       </div>
-    </div>
+      </div>
 
-  </main>
+      <!-- 
+      COCKPIT 
+      
+      <div id="cockpit" class="card">
+        <h3>Cockpit CD</h3>
+        <div class="item">
+          <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=ceb24b69-b8ca-4dc8-be78-69a489d2a9c8&reportObjectId=310ee4b9-30bf-45d8-91a5-953f0166c2b8&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=a4a3b5f3e53eddd8e7e0&visual=6cf560de81e0be362c08&height=298.22&width=544.26&bookmarkGuid=d5413826-42c8-40ce-9e3d-dc4f93365f29&pbi_source=shareVisual" target="_blank">TGV</a>
+          <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+        </div>
+        <div class="item">
+          <a class="btn compact" href="https://app.powerbi.com/Redirect?action=OpenReport&appId=ceb24b69-b8ca-4dc8-be78-69a489d2a9c8&reportObjectId=154feac1-d30a-46b2-998d-864f68eda306&ctid=9f1db594-b8ab-4e59-b56b-4a3c145eaf07&reportPage=ded744871ddf92995f2e&visual=06c83568e105957a95c2&height=673.00&width=1426.00&bookmarkGuid=d5618491-4ed2-4fc7-b509-e3424614cf95&pbi_source=shareVisual" target="_blank">INCONTOURNABLES</a>
+          <a href="#" class="sheet-link" target="_blank"><img src="sheet.png" alt="Sheet"></a>
+        </div>
+      </div>
+      -->
+    </main>
+  </div>
 
-  <footer>
-    <p>V1.1 12/2025 ©T.Salmeron</p>
-  </footer>
+  <script>
+    const menuLinks = document.querySelectorAll('.sidebar nav a');
+    const cards = document.querySelectorAll('.card');
+
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        const targetId = link.dataset.target;
+        cards.forEach(card => {
+          card.classList.toggle('active', card.id === targetId);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
