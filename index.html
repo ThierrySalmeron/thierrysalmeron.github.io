@@ -9,8 +9,12 @@
       --primary: #2563eb;
       --primary-dark: #1e40af;
       --primary-light: #60a5fa;
+      --sidebar-start: #071028;
+      --sidebar-end: #0b2540;
+      --header-bg: rgba(255,255,255,0.06);
+      --header-border: rgba(255,255,255,0.08);
       --text: #1f2937;
-      --bg: #f9fafb;
+      --bg: #e5e7eb;
       --card-bg: #fff;
       --border: #e5e7eb;
     }
@@ -27,22 +31,24 @@
     /* ===== SIDEBAR ===== */
     .sidebar {
       width: 230px;
-      background: var(--primary-dark);
+      background: linear-gradient(180deg, var(--sidebar-start), var(--sidebar-end));
       color: white;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 1.5rem;
       position: relative;
-      box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+      box-shadow: 6px 0 18px rgba(2,6,23,0.35);
+      border-right: 1px solid rgba(255,255,255,0.03);
+      overflow: hidden;
     }
 
     .sidebar h2 {
       position: absolute;
-      top: 2px;
+      top: 150px;
       left: 0;
       right: 0;
-      height: 64px;
+      height: 80px;
       margin: 5px;
       padding: 0 1.5rem;
       display: flex;
@@ -60,7 +66,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem; /* 🔹 espace vertical augmenté */
-      margin-top: 72px; /* space for the pinned title */
+      margin-top: 250px; /* space for the pinned title (moved down 50px) */
     }
 
     .sidebar nav a {
@@ -69,9 +75,10 @@
       color: white;
       text-decoration: none;
       padding: 0.8rem 0.8rem;
+      font-size: 0.95rem;
       border-radius: 8px;
       font-weight: 500;
-      transition: all 0.25s ease;
+      transition: all 0.20s cubic-bezier(.2,.9,.2,1);
       cursor: pointer;
       background: transparent;
     }
@@ -92,7 +99,9 @@
 
     .sidebar nav a:hover {
       background: rgba(255, 255, 255, 0.15);
-      transform: translateX(5px);
+      transform: translateX(8px);
+      font-size: 1.08rem; /* slightly larger on hover */
+      font-weight: 600;
     }
 
     .sidebar nav a.active::before {
@@ -118,17 +127,20 @@
     }
 
     header {
-      background: white;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      padding: 1rem 2rem;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+      box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+      padding: 1.6rem 2.25rem; /* increased vertical padding */
+      min-height: 96px; /* larger header area */
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     header h1 {
-      font-size: 1.4rem;
-      color: var(--primary-dark);
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin: 0;
+      line-height: 1;
     }
 
     .btn-primary {
