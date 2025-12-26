@@ -130,7 +130,7 @@
       background: linear-gradient(90deg, var(--primary-dark), var(--primary));
       box-shadow: 0 6px 18px rgba(2,6,23,0.12);
       padding: 1.6rem 2.25rem; /* increased vertical padding */
-      min-height: 96px; /* larger header area */
+      min-height: 50px; /* larger header area */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -144,18 +144,22 @@
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: #0f2540; /* darker navy */
       color: white;
       border: none;
-      border-radius: 6px;
-      padding: 0.6rem 1rem;
-      font-weight: bold;
+      border-radius: 8px;
+      padding: 0.9rem 1.3rem;
+      font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.18s, transform 0.12s;
+      transform-origin: center center;
     }
 
     .btn-primary:hover {
-      background: var(--primary-dark);
+      background: #bfc5d5; /* slightly darker on hover */
+      color:#1e40af;
+      transform: scale(1.2);
     }
 
     main {
