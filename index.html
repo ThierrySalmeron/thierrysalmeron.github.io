@@ -162,6 +162,20 @@
       transform: scale(1.2);
     }
 
+    /* Header actions: align buttons to the right and make same width */
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .header-actions .btn-primary {
+      width: 220px; /* same width for both buttons */
+      padding: 0.9rem 0.9rem;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
     main {
       flex: 1;
       padding: 2rem;
@@ -273,8 +287,10 @@
   <div class="main">
     <header>
       <h1>Pilotage</h1>
-      <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">DataBox</button>
-      <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">Où trouver les infos</button>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">DataBox</button>
+        <button class="btn-primary" onclick="window.open('https://databox.adeo.cloud/home','_blank')">Où trouver les infos</button>
+      </div>
     </header>
 
     <main>
